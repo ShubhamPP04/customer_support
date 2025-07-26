@@ -1,0 +1,235 @@
+.conversation-history {
+  width: 320px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e2e8f0;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 16px;
+}
+
+.new-conversation-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.new-conversation-btn:hover {
+  background-color: #2563eb;
+}
+
+.history-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 12px 16px;
+  margin: 12px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.retry-btn {
+  background: none;
+  border: 1px solid #dc2626;
+  color: #dc2626;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.retry-btn:hover {
+  background-color: #dc2626;
+  color: white;
+}
+
+.conversations-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #e5e7eb;
+  border-top: 2px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 12px;
+}
+
+.empty-conversations {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  color: #6b7280;
+}
+
+.empty-icon {
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.empty-conversations p {
+  font-weight: 500;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.empty-conversations span {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.conversation-item {
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background-color 0.2s;
+}
+
+.conversation-item:hover {
+  background-color: #f1f5f9;
+}
+
+.conversation-item.active {
+  background-color: #dbeafe;
+  border-left: 3px solid #3b82f6;
+}
+
+.conversation-main {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.conversation-preview {
+  font-size: 14px;
+  color: #1f2937;
+  font-weight: 500;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.conversation-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.message-count {
+  font-weight: 500;
+}
+
+.conversation-time {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.history-footer {
+  padding: 12px 16px;
+  border-top: 1px solid #e2e8f0;
+  background-color: #ffffff;
+}
+
+.refresh-btn {
+  width: 100%;
+  padding: 8px 12px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #374151;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.refresh-btn:hover {
+  background-color: #f1f5f9;
+  border-color: #d1d5db;
+}
+
+/* Scrollbar styling */
+.conversations-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.conversations-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.conversations-list::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 2px;
+}
+
+.conversations-list::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .conversation-history {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .conversation-history.mobile-open {
+    transform: translateX(0);
+  }
+}

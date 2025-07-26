@@ -163,7 +163,7 @@ def main():
     session = get_session(engine)
     
     # Define CSV file paths
-    data_dir = "../frontend/archive"
+    data_dir = "../archive"
     csv_files = {
         'distribution_centers': os.path.join(data_dir, 'distribution_centers.csv'),
         'users': os.path.join(data_dir, 'users.csv'),
