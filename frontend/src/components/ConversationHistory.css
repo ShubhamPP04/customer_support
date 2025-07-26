@@ -170,12 +170,6 @@
   font-weight: 500;
 }
 
-.conversation-time {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
 .history-footer {
   padding: 12px 16px;
   border-top: 1px solid #e2e8f0;

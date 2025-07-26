@@ -120,22 +120,6 @@
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.message-timestamp {
-  font-size: 11px;
-  color: #a0aec0;
-  margin-top: 6px;
-  padding: 0 8px;
-  font-weight: 500;
-}
-
-.message-user .message-timestamp {
-  text-align: right;
-}
-
-.message-assistant .message-timestamp {
-  text-align: left;
-}
-
 /* Enhanced styling for better readability */
 .message-text ul {
   margin: 12px 0;

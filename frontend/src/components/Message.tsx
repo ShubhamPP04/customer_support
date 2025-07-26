@@ -9,10 +9,6 @@ interface MessageProps {
 
 export const Message: React.FC<MessageProps> = ({ message }) => {
   const isUser = message.type === 'user';
-  const timestamp = new Date(message.timestamp).toLocaleTimeString([], { 
-    hour: '2-digit', 
-    minute: '2-digit' 
-  });
 
   // Function to render text with markdown-style bold formatting
   const renderContent = (content: string) => {
@@ -38,9 +34,6 @@ export const Message: React.FC<MessageProps> = ({ message }) => {
       <div className="message-content">
         <div className="message-text">
           {renderContent(message.content)}
-        </div>
-        <div className="message-timestamp">
-          {timestamp}
         </div>
       </div>
     </div>

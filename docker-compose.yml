@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  database:
+    image: mysql:8.0
+    container_name: customer_support_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: customer_support
+      MYSQL_USER: customer_support_user
+      MYSQL_PASSWORD: customer_support_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./backend/archive:/docker-entrypoint-initdb.d/data
+    networks:
+      - customer_support_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # Backend Service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: customer_support_backend
+    restart: unless-stopped
+    environment:
+      - FLASK_ENV=production
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - DATABASE_URL=mysql://customer_support_user:customer_support_password@database:3306/customer_support
+    ports:
+      - "5001:5001"
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - customer_support_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend Service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: customer_support_frontend
+    restart: unless-stopped
+    environment:
+      - REACT_APP_API_BASE_URL=http://localhost:5001
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - customer_support_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  customer_support_network:
+    driver: bridge
